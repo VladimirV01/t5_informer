@@ -85,7 +85,7 @@ So I found [this](https://www.printables.com/model/75343-k014s-parametric-18650-
 ![Assembled Informer](Photos/Assembled.jpg "Assembled Informer")
 
 ## References
-Working on this project I designed the case entirely from scratch but the software I found on other repositories and heavily modified it to work for my needs.
+Working on this project I designed the case entirely from scratch. However, the software was found in other repositories and was heavily modified by me to work for my needs.
 Here are the references to the repositories and articles which I used.
 
 
