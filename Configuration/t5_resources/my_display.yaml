@@ -1,0 +1,395 @@
+---
+font:
+  - file: "t5_resources/Google_Sans_Medium.ttf"
+    id: font_small
+    size: 28    
+    glyphs: |-
+      !"%()+=,-_.:°0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz'/&|ÁÉÍÓÖŐÚÜŰáéíóöőúüű
+  - file: "t5_resources/Google_Sans_Medium.ttf"
+    id: font_medium
+    size: 38
+    glyphs: |-
+      !"%()+=,-_.:°0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz'/&|ÁÉÍÓÖŐÚÜŰáéíóöőúüű
+  - file: "t5_resources/Google_Sans_Bold.ttf"
+    id: font_medium_bold
+    size: 38
+    glyphs: |-
+      !"%()+=,-_.:°0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz'/&|ÁÉÍÓÖŐÚÜŰáéíóöőúüű
+  - file: "t5_resources/Google_Sans_Medium.ttf"
+    id: font_big
+    size: 48
+    glyphs: |-
+      !"%()+=,-_.:°0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz'/&|ÁÉÍÓÖŐÚÜŰáéíóöőúüű
+  - file: "t5_resources/Google_Sans_Medium.ttf"
+    id: font_large
+    size: 56
+    glyphs: |-
+      !"%()+=,-_.:°0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz'/&|ÁÉÍÓÖŐÚÜŰáéíóöőúüű
+  - file: "t5_resources/Google_Sans_Bold.ttf"
+    id: font_xlarge_bold
+    size: 72
+    glyphs: |-
+      !"%()+=,-_.:°0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz'/&|ÁÉÍÓÖŐÚÜŰáéíóöőúüű
+  # material UI icons - from https://pictogrammers.github.io/@mdi/font/5.3.45/
+  - file: 't5_resources/materialdesignicons-webfont.ttf'
+    id: font_icons
+    size: 130
+    glyphs:
+      - "\U000F0594" # clear-night
+      - "\U000F0590" # cloudy
+      - "\U000F0591" # fog
+      - "\U000F0592" # hail
+      - "\U000F0593" # lightning
+      - "\U000F067E" # lightning-rainy
+      - "\U000F0F31" # night-partly-cloudy
+      - "\U000F0595" # partly-cloudy
+      - "\U000F0596" # pouring
+      - "\U000F0597" # rainy
+      - "\U000F0F36" # snowy
+      - "\U000F067F" # snowy-rainy
+      - "\U000F0599" # sunny
+      - "\U000F059D" # windy
+      - "\U000F059E" # windy-variant
+      - "\U000F0F38" # exCentereptional
+  - file: 't5_resources/materialdesignicons-webfont.ttf'
+    id: font_icons_small
+    size: 56
+    glyphs:
+      # weather
+      - "\U000F0594" # clear-night
+      - "\U000F0590" # cloudy
+      - "\U000F0591" # fog
+      - "\U000F0592" # hail
+      - "\U000F0593" # lightning
+      - "\U000F067E" # lightning-rainy
+      - "\U000F0F31" # night-partly-cloudy
+      - "\U000F0595" # partly-cloudy
+      - "\U000F0596" # pouring
+      - "\U000F0597" # rainy
+      - "\U000F0F36" # snowy
+      - "\U000F067F" # snowy-rainy
+      - "\U000F0599" # sunny
+      - "\U000F059D" # windy
+      - "\U000F059E" # windy-variant
+      - "\U000F0F38" # exceptional
+      # moon phases
+      - "\U000F0F61" # moon-first-quarter
+      - "\U000F0F62" # moon-full
+      - "\U000F0F63" # moon-last-quarter
+      - "\U000F0F64" # moon-new
+      - "\U000F0F65" # moon-waning-crescent
+      - "\U000F0F66" # moon-waning-gibbous
+      - "\U000F0F67" # moon-waxing-crescent
+      - "\U000F0F68" # moon-waxing-gibbous
+      # other icons
+      - "\U000F10C2" # Temperature High
+      - "\U000F10C3" # Temperature Low
+      - "\U000F054B" # umbrella
+      - "\U000F02E3" # Bed
+      - "\U000F064D" # human-male
+      - "\U000F0649" # human-female
+      - "\U000F0C0D" # L circle
+      - "\U000F0C37" # Z circle      
+      - "\U000F0F90" # Wardrobe
+      - "\U000F09A1" # Shower Head   
+      - "\U000F04B9" # sofa
+      - "\U000F04DB" # stop
+      - "\U000F040A" # play
+      - "\U000F03E4" # pause
+      - "\U000F0643" # man
+      - "\U000F1078" # woman
+      - "\U000F00ED" # calendar
+      - "\U000F078D" # water level
+      # Battery Icons
+      - "\U000F007A" # Battery 0
+      - "\U000F007C" # Battery 30
+      - "\U000F007E" # Battery 50
+      - "\U000F0081" # Battery 80
+      - "\U000F0079" # Battery 100
+
+  - file: 't5_resources/materialdesignicons-webfont.ttf'
+    id: font_icons_tiny
+    size: 32
+    glyphs:
+      - "\U000F005E" # arrow-up-thick
+      - "\U000F0046" # arrow-down-thick
+      - "\U000F059C" # Sunrise
+      - "\U000F059B" # Sunset
+      # Battery Icons
+      - "\U000F007A" # Battery 0
+      - "\U000F007C" # Battery 30
+      - "\U000F007E" # Battery 50
+      - "\U000F0081" # Battery 80
+      - "\U000F0079" # Battery 100
+
+display:
+  - platform: t547
+    id: t5_display
+    rotation: 0
+    update_interval: 60s
+    lambda: |-
+      // icon constants
+      #define ICON_temp_high        "\U000F10C2"
+      #define ICON_temp_low         "\U000F10C3"
+      #define ICON_umbrella         "\U000F054B"
+      #define ICON_bed              "\U000F02E3"
+      #define ICON_human_male       "\U000F064D"
+      #define ICON_human_female     "\U000F0649"
+      #define ICON_wardrobe         "\U000F0F90"     
+      #define ICON_shower_head      "\U000F09A1"      
+      #define ICON_sofa             "\U000F04B9"
+      #define ICON_man              "\U000F0643"
+      #define ICON_woman            "\U000F1078"
+      #define ICON_up               "\U000F005E"
+      #define ICON_down             "\U000F0046"
+      #define ICON_sunrise          "\U000F059C"
+      #define ICON_sunset           "\U000F059B"
+      #define ICON_calendar         "\U000F00ED"
+      #define ICON_water_lvl        "\U000F078D"
+      
+      // positioning constants
+      #define xRes 960
+      #define yRes 540
+      #define xCenter (xRes/2 + 40) // X position center
+      #define padding 10
+      #define celsiusSuperscript 12
+      #define rowHeight 65
+      #define tasksRowHeight 65
+      #define temperatureCol 200
+      #define humidityCol 290
+      #define weatherCol 120
+      #define weatherTempCorr 15
+      #define condCorrect 30
+
+      // helper variables
+      int y = 0;
+
+      // == Date ===
+
+      // Time
+      auto time = id(ntp).now();
+      auto dayTime = id(hasun).state == "above_horizon";
+      //it.strftime(padding, 0, id(font_xlarge_bold), TextAlign::TOP_LEFT, "%H:%M", time);
+      // Name + nameday
+      std::string dateFormat = generateDateFormat(time);
+      it.strftime(padding, padding + 3, id(font_medium_bold), TextAlign::TOP_LEFT, dateFormat.c_str(), time);
+      // moon phase
+      auto moonIcon = moonToIcon(id(moon).state);
+      it.printf(padding + 330, padding, id(font_icons_small), TextAlign::TOP_LEFT, moonIcon.c_str()); 
+
+      // === BATTERY Indication ===
+      auto battIcon = batteryToIcon(id(battery_percentage).state);
+      it.printf(xRes - padding, padding, id(font_icons_tiny), TextAlign::TOP_RIGHT, battIcon.c_str()); 
+      it.printf(xRes - padding - 40 , padding, id(font_small), TextAlign::TOP_RIGHT, "%.2fV/%.0f%%", id(battery_voltage).voltage->state, id(battery_percentage).state);
+
+      // === LEFT - Tasks ===
+      
+      if(atoi(id(events_count).state.c_str()) > 0) {
+        y = 90;
+        it.printf(padding, y, id(font_icons_small), TextAlign::CENTER_LEFT, ICON_calendar); // Print calendar ICON
+        std::string start = id(event_1_start).state;
+        struct tm tp;
+        strptime(start.c_str(), "%Y-%m-%dT%H:%M:%S%z", &tp);
+        tp.tm_isdst = 0;
+        time_t c_t = mktime(&tp);
+        auto t = ESPTime::from_c_tm(&tp, c_t);
+        it.strftime(70 + 10, y-15, id(font_small), TextAlign::CENTER_LEFT, "%a", t);
+        it.strftime(70 + 0, y+15, id(font_small), TextAlign::CENTER_LEFT, "%H:%M", t);
+        it.printf(70 + 80, y, id(font_medium), TextAlign::CENTER_LEFT, "%.35s", id(event_1_summary).state.c_str());
+
+        if ( strcmp(id(event_2_summary).state.c_str(), "Unavailable") != 0) {
+          y += tasksRowHeight; // 155
+          it.printf(padding, y, id(font_icons_small), TextAlign::CENTER_LEFT, ICON_calendar); // Print calendar ICON
+          std::string start = id(event_2_start).state;
+          struct tm tp;
+          strptime(start.c_str(), "%Y-%m-%dT%H:%M:%S%z", &tp);
+          tp.tm_isdst = 0;
+          time_t c_t = mktime(&tp);
+          auto t = ESPTime::from_c_tm(&tp, c_t);
+          it.strftime(70 + 10, y-15, id(font_small), TextAlign::CENTER_LEFT, "%a", t);
+          it.strftime(70 + 0, y+15, id(font_small), TextAlign::CENTER_LEFT, "%H:%M", t);
+          it.printf(70 + 80, y, id(font_medium), TextAlign::CENTER_LEFT, "%.35s", id(event_2_summary).state.c_str());
+        }
+
+        if ( strcmp(id(event_3_summary).state.c_str(), "Unavailable") != 0 ) {
+          y += tasksRowHeight;  // 220
+          it.printf(padding, y, id(font_icons_small), TextAlign::CENTER_LEFT, ICON_calendar); // Print calendar ICON
+          std::string start = id(event_3_start).state;
+          struct tm tp;
+          strptime(start.c_str(), "%Y-%m-%dT%H:%M:%S%z", &tp);
+          tp.tm_isdst = 0;
+          time_t c_t = mktime(&tp);
+          auto t = ESPTime::from_c_tm(&tp, c_t);
+          it.strftime(70 + 10, y-15, id(font_small), TextAlign::CENTER_LEFT, "%a", t);
+          it.strftime(70 + 0, y+15, id(font_small), TextAlign::CENTER_LEFT, "%H:%M", t);
+          it.printf(70 + 80, y, id(font_medium), TextAlign::CENTER_LEFT, "%.35s", id(event_3_summary).state.c_str());
+        }
+
+      } else {
+        y = 150;
+        it.printf(padding, y, id(font_icons_small), TextAlign::CENTER_LEFT, ICON_calendar); // Print calendar ICON
+        it.printf(70, y, id(font_big), TextAlign::CENTER_LEFT, "No tasks for 3 days");
+      }
+
+      // === RIGHT - Weather ===
+
+      y = 135;
+      // current temperature
+      if (!isnan(id(temperature).state)) {
+        it.printf(xRes - 210, y, id(font_xlarge_bold), TextAlign::CENTER_RIGHT, "%.0f", id(temperature).state);
+        it.printf(xRes - 210, y - celsiusSuperscript, id(font_large), TextAlign::CENTER_LEFT, "°C");
+      }
+      // current condition icon
+      auto conditionIcon = conditionToIcon(id(condition).state, dayTime);
+      it.printf(xRes - padding, y, id(font_icons), TextAlign::CENTER_RIGHT, conditionIcon.c_str());
+      y = 200;
+      it.printf(xCenter + weatherCol, y, id(font_icons_tiny), TextAlign::BASELINE_RIGHT, ICON_sunrise);
+      it.printf(xCenter + weatherCol, y, id(font_small), TextAlign::BASELINE_LEFT, "%s", id(sunrise).state.c_str());      
+      it.printf(xCenter + weatherCol*2, y, id(font_icons_tiny), TextAlign::BASELINE_RIGHT, ICON_sunset);
+      it.printf(xCenter + weatherCol*2, y, id(font_small), TextAlign::BASELINE_LEFT, "%s", id(sunset).state.c_str());  
+
+      // === LEFT - room info ===
+      
+      // Living room
+      y = 320;
+      it.printf(padding, y, id(font_icons_small), TextAlign::BASELINE_LEFT, ICON_sofa); 
+      if (!isnan(id(temp_living).state)) {
+        it.printf(temperatureCol, y, id(font_large), TextAlign::BASELINE_RIGHT, "%.1f", id(temp_living).state);
+        it.printf(temperatureCol, y - celsiusSuperscript, id(font_medium), TextAlign::BASELINE_LEFT, "°C");
+      }
+      if (!isnan(id(humidity_living).state)) {
+        it.printf(humidityCol, y, id(font_medium), TextAlign::BASELINE_RIGHT, "%.0f", id(humidity_living).state);
+        it.printf(humidityCol, y, id(font_small), TextAlign::BASELINE_LEFT, "%%");
+      }
+      // Bedroom
+      y += rowHeight; // 385
+      it.printf(padding, y, id(font_icons_small), TextAlign::BASELINE_LEFT, ICON_bed); 
+      if (!isnan(id(temp_bedroom).state)) {
+        it.printf(temperatureCol, y, id(font_large), TextAlign::BASELINE_RIGHT, "%.1f", id(temp_bedroom).state);
+        it.printf(temperatureCol, y - celsiusSuperscript, id(font_medium), TextAlign::BASELINE_LEFT, "°C");
+      }
+      if (!isnan(id(humidity_bedroom).state)) {
+        it.printf(humidityCol, y, id(font_medium), TextAlign::BASELINE_RIGHT, "%.0f", id(humidity_bedroom).state);
+        it.printf(humidityCol, y, id(font_small), TextAlign::BASELINE_LEFT, "%%");
+      }
+      // Bathroom
+      y += rowHeight; // 450
+      it.printf(padding, y, id(font_icons_small), TextAlign::BASELINE_LEFT, ICON_shower_head); 
+      if (!isnan(id(temp_bath).state)) {
+        it.printf(temperatureCol, y, id(font_large), TextAlign::BASELINE_RIGHT, "%.1f", id(temp_bath).state);
+        it.printf(temperatureCol, y - celsiusSuperscript, id(font_medium), TextAlign::BASELINE_LEFT, "°C");
+      }
+      if (!isnan(id(humidity_bath).state)) {
+        it.printf(humidityCol, y, id(font_medium), TextAlign::BASELINE_RIGHT, "%.0f", id(humidity_bath).state);
+        it.printf(humidityCol, y, id(font_small), TextAlign::BASELINE_LEFT, "%%");
+      }
+      // Closet
+      y += rowHeight; // 515
+      it.printf(padding, y, id(font_icons_small), TextAlign::BASELINE_LEFT, ICON_wardrobe); 
+      if (!isnan(id(temp_closet).state)) {
+        it.printf(temperatureCol, y, id(font_large), TextAlign::BASELINE_RIGHT, "%.1f", id(temp_closet).state);
+        it.printf(temperatureCol, y - celsiusSuperscript, id(font_medium), TextAlign::BASELINE_LEFT, "°C");
+      }
+      if (!isnan(id(humidity_closet).state)) {
+        it.printf(humidityCol, y, id(font_medium), TextAlign::BASELINE_RIGHT, "%.0f", id(humidity_closet).state);
+        it.printf(humidityCol, y, id(font_small), TextAlign::BASELINE_LEFT, "%%");
+      }
+
+      // === MIDDLE - Locations ===
+
+      it.line(humidityCol + 40, 255, humidityCol + 40, yRes);
+
+      auto centerCol = (humidityCol + 40 + xCenter - 10) / 2;
+      y = 320;
+      it.printf(centerCol, y + rowHeight/4, id(font_icons_small), TextAlign::BASELINE_CENTER, ICON_man);
+      y += rowHeight; // 385
+      auto vladLocationText = locationToClear(id(vladimir_location).state);
+      it.printf(centerCol, y - rowHeight/4, id(font_medium), TextAlign::BASELINE_CENTER, "%s", vladLocationText.c_str());
+      y += rowHeight; // 450
+      it.printf(centerCol, y + rowHeight/4, id(font_icons_small), TextAlign::BASELINE_CENTER, ICON_woman);
+      y += rowHeight; // 515
+      auto dinaLocationText = locationToClear(id(dina_location).state);
+      it.printf(centerCol, y - rowHeight/4, id(font_medium), TextAlign::BASELINE_CENTER, "%s", dinaLocationText.c_str());
+
+      it.line(xCenter - 10, 255, xCenter - 10, yRes);
+
+      // === RIGHT - Forecast ===
+
+      // Day of week
+      y = 280;
+      it.printf(xCenter + weatherCol, y, id(font_medium), TextAlign::BASELINE_CENTER, "%s", id(day_1).state.c_str());
+      it.printf(xCenter + weatherCol*2, y, id(font_medium), TextAlign::BASELINE_CENTER, "%s", id(day_2).state.c_str());
+      it.printf(xCenter + weatherCol*3, y, id(font_medium), TextAlign::BASELINE_CENTER, "%s", id(day_3).state.c_str());
+
+      // Condition
+      y += 60; // 320
+      it.printf(xCenter + weatherCol + condCorrect, y, id(font_icons_small), TextAlign::BASELINE_RIGHT, conditionToSmallIcon(id(day_1_condition).state, dayTime).c_str());
+      it.printf(xCenter + weatherCol*2 + condCorrect, y, id(font_icons_small), TextAlign::BASELINE_RIGHT, conditionToSmallIcon(id(day_2_condition).state, dayTime).c_str());
+      it.printf(xCenter + weatherCol*3 + condCorrect, y, id(font_icons_small), TextAlign::BASELINE_RIGHT, conditionToSmallIcon(id(day_3_condition).state, dayTime).c_str());
+
+      // High/low temperature
+      y += 60; // 380
+      it.printf(xCenter, y, id(font_icons_small), TextAlign::BASELINE_LEFT, ICON_temp_high);
+      if (!isnan(id(day_1_max).state)) {
+        it.printf(xCenter + weatherCol + weatherTempCorr, y, id(font_large), TextAlign::BASELINE_RIGHT, "%.0f", id(day_1_max).state);
+        it.printf(xCenter + weatherCol + weatherTempCorr, y - celsiusSuperscript, id(font_medium), TextAlign::BASELINE_LEFT, "°C");
+      }
+      if (!isnan(id(day_2_max).state)) {
+        it.printf(xCenter + weatherCol*2 + weatherTempCorr, y, id(font_large), TextAlign::BASELINE_RIGHT, "%.0f", id(day_2_max).state);
+        it.printf(xCenter + weatherCol*2 + weatherTempCorr, y - celsiusSuperscript, id(font_medium), TextAlign::BASELINE_LEFT, "°C");
+      }
+      if (!isnan(id(day_3_max).state)) {
+        it.printf(xCenter + weatherCol*3 + weatherTempCorr, y, id(font_large), TextAlign::BASELINE_RIGHT, "%.0f", id(day_3_max).state);
+        it.printf(xCenter + weatherCol*3 + weatherTempCorr, y - celsiusSuperscript, id(font_medium), TextAlign::BASELINE_LEFT, "°C");
+      }
+      y += rowHeight; // 425
+      it.printf(xCenter, y, id(font_icons_small), TextAlign::BASELINE_LEFT, ICON_temp_low);
+      if (!isnan(id(day_1_min).state)) {
+        it.printf(xCenter + weatherCol + weatherTempCorr, y, id(font_large), TextAlign::BASELINE_RIGHT, "%.0f", id(day_1_min).state);
+        it.printf(xCenter + weatherCol + weatherTempCorr, y - celsiusSuperscript, id(font_medium), TextAlign::BASELINE_LEFT, "°C");
+      }
+      if (!isnan(id(day_2_min).state)) {
+        it.printf(xCenter + weatherCol*2 + weatherTempCorr, y, id(font_large), TextAlign::BASELINE_RIGHT, "%.0f", id(day_2_min).state);
+        it.printf(xCenter + weatherCol*2 + weatherTempCorr, y - celsiusSuperscript, id(font_medium), TextAlign::BASELINE_LEFT, "°C");
+      }
+      if (!isnan(id(day_3_min).state)) {
+        it.printf(xCenter + weatherCol*3 + weatherTempCorr, y, id(font_large), TextAlign::BASELINE_RIGHT, "%.0f", id(day_3_min).state);
+        it.printf(xCenter + weatherCol*3 + weatherTempCorr, y - celsiusSuperscript, id(font_medium), TextAlign::BASELINE_LEFT, "°C");
+      }
+      
+      // Precipitation level
+      y += rowHeight; // 490
+      it.printf(xCenter, y, id(font_icons_small), TextAlign::BASELINE_LEFT, ICON_water_lvl);
+      // 20mm precipitation is using the max bar height, which is 25px
+      if (!isnan(id(day_1_prec_prob).state)) {
+        auto prec1size = max(min(id(day_1_prec).state * 25.0 / 20.0, 25.0), 1.0);
+        it.filled_rectangle(xCenter + weatherCol - 45, y - prec1size, weatherCol - padding*2, prec1size);
+        if (id(day_1_prec_prob).state > 25) {
+          it.printf(xCenter + weatherCol + 3, y-prec1size-padding/2, id(font_medium), TextAlign::BASELINE_RIGHT, "%.0f", id(day_1_prec_prob).state);
+          it.printf(xCenter + weatherCol + 3, y-prec1size-padding/2, id(font_small), TextAlign::BASELINE_LEFT, "%");
+        } else if (id(day_1_prec_prob).state > 0) {
+          it.printf(xCenter + weatherCol + 3, y-prec1size-padding/2, id(font_medium), TextAlign::BASELINE_CENTER, ". . .");
+        }
+      }
+
+      if (!isnan(id(day_2_prec_prob).state)) {
+        auto prec2size = max(min(id(day_2_prec).state * 25.0 / 20.0, 25.0), 1.0);
+        it.filled_rectangle(xCenter + weatherCol*2 - 45, y - prec2size, weatherCol - padding*2, prec2size);
+        if (id(day_2_prec_prob).state > 25) {
+          it.printf(xCenter + weatherCol*2 + 3, y-prec2size-padding/2, id(font_medium), TextAlign::BASELINE_RIGHT, "%.0f", id(day_2_prec_prob).state);
+          it.printf(xCenter + weatherCol*2 + 3, y-prec2size-padding/2, id(font_small), TextAlign::BASELINE_LEFT, "%");
+        } else if (id(day_2_prec_prob).state > 0) {
+          it.printf(xCenter + weatherCol*2 + 3, y-prec2size-padding/2, id(font_medium), TextAlign::BASELINE_CENTER, ". . .");
+        }
+      }
+
+      if (!isnan(id(day_3_prec_prob).state)) {
+        auto prec3size = max(min(id(day_3_prec).state * 25.0 / 20.0, 25.0), 1.0);
+        it.filled_rectangle(xCenter + weatherCol*3 - 45, y - prec3size, weatherCol - padding*2, prec3size);
+        if (id(day_3_prec_prob).state > 25) {
+          it.printf(xCenter + weatherCol*3 + 3, y-prec3size-padding/2, id(font_medium), TextAlign::BASELINE_RIGHT, "%.0f", id(day_3_prec_prob).state);
+          it.printf(xCenter + weatherCol*3 + 3, y-prec3size-padding/2, id(font_small), TextAlign::BASELINE_LEFT, "%");
+        } else if (id(day_3_prec_prob).state > 0) {
+          it.printf(xCenter + weatherCol*3 + 3, y-prec3size-padding/2, id(font_medium), TextAlign::BASELINE_CENTER, ". . .");
+        }
+      }

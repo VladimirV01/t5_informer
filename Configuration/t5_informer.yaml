@@ -1,0 +1,379 @@
+---
+substitutions:
+  device: t5_informer
+  name: "Lilygo Informer"
+  ip_address: 192.168.100.75
+  ip_gw: 192.168.100.1
+  ip_netmask: 255.255.255.0
+  run_time: 2min
+  sleep_time: 1h
+  night_sleep_time: 6h # This is not used yet
+
+esphome:
+  name: ${device}
+  friendly_name: ${name}
+  includes:
+    - t5_resources/common.h
+  on_boot:
+    then:
+      - pcf8563.read_time:  # Update the RTC
+      - script.execute: sleep_routine  # Running the script to prevent the device from entering deep sleep if there is an update pending.
+
+  platformio_options:
+    board_dir: boards
+    board: lilygo-t5-47-plus
+
+esp32:
+  variant: esp32s3
+  board: lilygo-t5-47-plus
+  framework:
+    type: arduino
+
+logger:
+
+api:
+  encryption:
+    key: <EDITED>
+
+ota:
+
+wifi:
+  networks:
+    - ssid: !secret iot_network_ssid
+      password: !secret iot_network_password
+  manual_ip:
+    static_ip: ${ip_address}
+    gateway: ${ip_gw}
+    subnet: ${ip_netmask}
+
+  ap:
+    ssid: "AP ${name}"
+    password: !secret wifi_ap_password
+
+captive_portal:
+
+web_server:
+  port: 80
+  include_internal: True
+
+sun:
+  latitude: 47.032292°
+  longitude: 28.766057°
+
+binary_sensor:
+  - platform: homeassistant # This imports the input boolean from the homeassistant to check if there is pending update
+    id: update
+    internal: true
+    entity_id: input_boolean.esphome_pending_update
+# The physical button is commented because it is used for wake up from deep sleep. 
+# If you want to use it for other purposes, comment the deep sleep section   
+#  - platform: gpio
+#    pin: 
+#      number: GPIO21 #was GPIO39 on the previous board
+#      inverted: true
+#    name: "Button 1"
+#    on_press:
+#      - logger.log: Physical Button Pressed
+
+
+
+i2c:
+  sda: GPIO18
+  scl: GPIO17
+  scan: false
+  id: rtc_bus
+  frequency: 100khz
+
+time:
+  - platform: pcf8563
+    id: pcf_time
+    address: 0x51  
+    update_interval: never
+  - platform: homeassistant
+    id: ntp
+    timezone: Europe/Chisinau
+    on_time_sync:
+      then:
+        - pcf8563.write_time:
+        - component.update: sunrise
+        - component.update: sunset
+
+external_components:
+  - source: github://nickolay/esphome-lilygo-t547plus
+    components: ["t547"]
+  - source: github://kaeltis/esphome-lilygo-t547plus
+    components: ["lilygo_t5_47_battery"]
+
+sensor:
+  - platform: lilygo_t5_47_battery
+    id: battery_voltage
+    voltage:
+      name: "Battery Voltage"
+
+  - platform: template
+    name: "Battery Percentage"
+    id: battery_percentage
+    lambda: |-
+      // tweak values in mapping for calibration
+      // 4.1 = max voltage
+      // 3.3 = min voltage
+      float y = (id(battery_voltage).voltage->state - 3.3) * 100.0 / (4.1 - 3.3);
+      if (y < 100.0) 
+      { return y; } 
+      else if (y < 0)
+      { return 0.0; }
+      else { return 100.0; };
+
+# Here are some sensors that I used as a workaround to display the forecast temperature for the next 3 days
+# I tried to pass the JSON to the device itself but didn't manage to parse it there and ended up sending this bunch of sensors...
+# If you have the knowledge and possiblity to improve this, please let me know.
+  - platform: homeassistant
+    entity_id: sensor.openweathermap_temperature  # This is the current temperature
+    id: temperature
+    internal: true
+  - platform: homeassistant
+    entity_id: sensor.filtered_forecast  # This is the next day minimal temperature
+    attribute: day1_min
+    id: day_1_min
+    internal: true
+  - platform: homeassistant
+    entity_id: sensor.filtered_forecast  # This is the next day maximal temperature
+    attribute: day1_max
+    id: day_1_max
+    internal: true
+  - platform: homeassistant
+    entity_id: sensor.filtered_forecast  # This is the next day precipitation level
+    attribute: day1_precipitation
+    id: day_1_prec
+    internal: true
+  - platform: homeassistant
+    entity_id: sensor.filtered_forecast  # This is the next day precipitation probability
+    attribute: day1_prec_prob
+    id: day_1_prec_prob
+    internal: true
+  - platform: homeassistant
+    entity_id: sensor.filtered_forecast  # This is the second day minimal temperature
+    attribute: day2_min
+    id: day_2_min
+    internal: true
+  - platform: homeassistant
+    entity_id: sensor.filtered_forecast  # This is the second day maximal temperature
+    attribute: day2_max
+    id: day_2_max
+    internal: true
+  - platform: homeassistant
+    entity_id: sensor.filtered_forecast  # This is the second day precipitation level
+    attribute: day2_precipitation
+    id: day_2_prec
+    internal: true
+  - platform: homeassistant
+    entity_id: sensor.filtered_forecast  # This is the second day precipitation probability
+    attribute: day2_prec_prob
+    id: day_2_prec_prob
+    internal: true
+  - platform: homeassistant
+    entity_id: sensor.filtered_forecast  # This is the third day minimal temperature
+    attribute: day3_min
+    id: day_3_min
+    internal: true
+  - platform: homeassistant
+    entity_id: sensor.filtered_forecast  # This is the third day maximal temperature
+    attribute: day3_max
+    id: day_3_max
+    internal: true
+  - platform: homeassistant
+    entity_id: sensor.filtered_forecast  # This is the third day precipitation level
+    attribute: day3_precipitation
+    id: day_3_prec
+    internal: true
+  - platform: homeassistant
+    entity_id: sensor.filtered_forecast  # This is the third day precipitation probability
+    attribute: day3_prec_prob
+    id: day_3_prec_prob
+    internal: true
+
+  # temperature/humidity sensors in different rooms
+  - platform: homeassistant
+    entity_id: sensor.bedroom_temperature
+    id: temp_bedroom
+    internal: true
+  - platform: homeassistant
+    entity_id: sensor.bedroom_humidity
+    id: humidity_bedroom
+    internal: true
+  - platform: homeassistant
+    entity_id: sensor.living_temperature
+    id: temp_living
+    internal: true
+  - platform: homeassistant
+    entity_id: sensor.living_humidity
+    id: humidity_living
+    internal: true
+  - platform: homeassistant
+    entity_id: sensor.bathroom_temperature
+    id: temp_bath
+    internal: true
+  - platform: homeassistant
+    entity_id: sensor.bathroom_humidity
+    id: humidity_bath
+    internal: true
+  - platform: homeassistant
+    entity_id: sensor.closet_temperature
+    id: temp_closet
+    internal: true
+  - platform: homeassistant
+    entity_id: sensor.closet_humidity
+    id: humidity_closet
+    internal: true
+
+text_sensor:
+  - platform: homeassistant
+    entity_id: sensor.filtered_forecast  # Here is the next day simplified name (3 letters)
+    attribute: day1
+    id: day_1
+    internal: true
+  - platform: homeassistant
+    entity_id: sensor.filtered_forecast  # Here is the next day condition
+    attribute: day1_condition
+    id: day_1_condition
+    internal: true
+  - platform: homeassistant
+    entity_id: sensor.filtered_forecast  # Here is the second day simplified name
+    attribute: day2
+    id: day_2
+    internal: true
+  - platform: homeassistant
+    entity_id: sensor.filtered_forecast  # Here is the second day condition
+    attribute: day2_condition
+    id: day_2_condition
+    internal: true
+  - platform: homeassistant
+    entity_id: sensor.filtered_forecast  # Here is the third day simplified name
+    attribute: day3
+    id: day_3
+    internal: true
+  - platform: homeassistant
+    entity_id: sensor.filtered_forecast  # Here is the third day simplified name
+    attribute: day3_condition
+    id: day_3_condition
+    internal: true
+
+# Sun and moon sensor
+  - platform: sun
+    id: sunrise
+    name: Sun Next Sunrise
+    type: sunrise
+    format: "%H:%M"
+    internal: true
+  - platform: sun
+    id: sunset
+    name: Sun Next Sunset
+    type: sunset
+    format: "%H:%M"    
+    internal: true
+  - platform: homeassistant
+    entity_id: sun.sun
+    id: hasun
+    internal: true
+  - platform: homeassistant
+    entity_id: sensor.moon_phase
+    id: moon
+    internal: true
+
+  - platform: homeassistant
+    entity_id: sensor.openweathermap_condition
+    id: condition
+    internal: true
+  - platform: homeassistant
+    entity_id: sensor.openweathermap_feels_like_temperature
+    id: feels_like
+    internal: true
+
+
+# Here again is a workaround to display my tasks since I could not parse the JSON on the esp32.
+  - platform: homeassistant  # This sensor will have the number of scheduled events
+    entity_id: sensor.vladimir_s_scheduled_events
+    internal: true
+    id: events_count
+
+  - platform: homeassistant  # All events in JSON. Didn't manage to parse it locally.
+    entity_id: sensor.vladimir_s_scheduled_events
+    internal: true
+    attribute: scheduled_events
+    id: events
+
+  - platform: homeassistant  # First event data
+    entity_id: sensor.vladimir_s_scheduled_events
+    internal: true
+    attribute: event1_summary
+    id: event_1_summary
+  - platform: homeassistant
+    entity_id: sensor.vladimir_s_scheduled_events
+    internal: true
+    attribute: event1_start
+    id: event_1_start
+
+  - platform: homeassistant  # Second event data
+    entity_id: sensor.vladimir_s_scheduled_events
+    internal: true
+    attribute: event2_summary
+    id: event_2_summary
+  - platform: homeassistant
+    entity_id: sensor.vladimir_s_scheduled_events
+    internal: true
+    attribute: event2_start
+    id: event_2_start
+
+  - platform: homeassistant  # Third event data
+    entity_id: sensor.vladimir_s_scheduled_events
+    internal: true
+    attribute: event3_summary
+    id: event_3_summary
+  - platform: homeassistant
+    entity_id: sensor.vladimir_s_scheduled_events
+    internal: true
+    attribute: event3_start
+    id: event_3_start
+
+  # zone tracking
+  - platform: homeassistant
+    entity_id: device_tracker.vladimir_s_phone
+    id: vladimir_location
+    internal: true
+  - platform: homeassistant
+    entity_id: device_tracker.dina_s_phone
+    id: dina_location
+    internal: true
+    on_value: # Actions to perform once data for the last sensor has been received
+      then:
+        - script.execute: all_data_received  
+
+deep_sleep:
+  # run_duration: ${run_time}
+  sleep_duration: ${sleep_time}
+  id: deep_sleep_1
+  esp32_ext1_wakeup:
+    pins: GPIO21
+    mode: ALL_LOW
+
+script:
+  - id: all_data_received  # This script updates the display component
+    then:
+      - component.update: t5_display
+
+  - id: sleep_routine  # This script prevents deep sleep if there is an update pending.
+    mode: queued
+    then:
+      - delay: ${run_time}
+      - if: 
+          condition:
+            - binary_sensor.is_on: update
+          then:
+            - logger.log: "There is an update pending. Preventing deep Sleep."
+            - deep_sleep.prevent: deep_sleep_1
+          else:
+            - logger.log: "Entering deep sleep..."
+            - deep_sleep.enter: deep_sleep_1
+      - script.execute: sleep_routine
+
+<<: !include t5_resources/my_display.yaml

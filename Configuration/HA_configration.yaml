@@ -1,0 +1,102 @@
+template:
+  - trigger: 
+    # This one uses the service to poll the calendar events and parse the result in a sensor which is passed to ESPHome
+      - platform: time_pattern
+        minutes: /30 # Every half an hour
+        # minutes: /1 # Every minute
+    action:
+      - service: calendar.get_events
+        target:
+          entity_id: calendar.personal
+        data:
+          duration:
+            hours: 72  # Get the events for the next 3 days
+        response_variable: scheduled_events
+    sensor:
+      - name: Vladimir's Scheduled Events
+        unique_id: vladimir_scheduled_events
+        state: "{{ scheduled_events['calendar.personal']['events'] | count() }}"  # This state gives the number of the events in the next 72 hours (3 days)
+        attributes:
+          scheduled_events: "{{ scheduled_events['calendar.personal']['events'] }}"
+          event1_summary: >
+            {% if scheduled_events['calendar.personal']['events'] | count() > 0 %}
+              {{ (scheduled_events['calendar.personal']['events'] | sort(attribute="start")).0.summary }}
+            {% else %}
+              Unavailable
+            {% endif %}
+          event1_start: >
+            {% if scheduled_events['calendar.personal']['events'] | count() > 0 %}
+              {{ (scheduled_events['calendar.personal']['events'] | sort(attribute="start")).0.start }}
+            {% else %}
+              Unavailable
+            {% endif %}
+          event2_summary: >
+            {% if scheduled_events['calendar.personal']['events'] | count() > 1 %}
+              {{ (scheduled_events['calendar.personal']['events'] | sort(attribute="start")).1.summary }}
+            {% else %}
+              Unavailable
+            {% endif %}
+          event2_start: >
+            {% if scheduled_events['calendar.personal']['events'] | count() > 1 %}
+              {{ (scheduled_events['calendar.personal']['events'] | sort(attribute="start")).1.start }}
+            {% else %}
+              Unavailable
+            {% endif %}
+          event3_summary: >
+            {% if scheduled_events['calendar.personal']['events'] | count() > 2 %}
+              {{ (scheduled_events['calendar.personal']['events'] | sort(attribute="start")).2.summary }}
+            {% else %}
+              Unavailable
+            {% endif %}
+          event3_start: >
+            {% if scheduled_events['calendar.personal']['events'] | count() > 2 %}
+              {{ (scheduled_events['calendar.personal']['events'] | sort(attribute="start")).2.start }}
+            {% else %}
+              Unavailable
+            {% endif %}
+        icon: mdi:calendar
+  
+  - trigger: 
+      # This one polls the forecast data from the openweathermap service. 
+      # Since I use the free version of the service, only hourly forecast is available so I had to work around that.
+      - platform: time_pattern
+        minutes: /30 # Every half an hour
+        # minutes: /1
+    action:
+      - service: weather.get_forecasts
+        target:
+          entity_id: weather.openweathermap
+        data:
+          type: hourly
+        response_variable: full_data
+    sensor:
+      - name: Filtered Forecast
+        unique_id: filtered_weather_forecast
+        state: "{{ now().date().strftime('%A') }}"  # Current day name
+        icon: mdi:weather-cloudy-clock
+        attributes:
+          # Next day name simplified (3 letters only)         
+          day1: "{{ (now().date() + timedelta(days=1)).strftime('%a') }}"
+          # Minimum temperature for the first day
+          day1_min: "{{ full_data['weather.openweathermap']['forecast'] | selectattr('datetime', 'search', (now().date() + timedelta(days=1)) | string ) | map(attribute='temperature') | list | min }}"
+          # Maximum Temperature for the first day
+          day1_max: "{{ full_data['weather.openweathermap']['forecast'] | selectattr('datetime', 'search', (now().date() + timedelta(days=1)) | string ) | map(attribute='temperature') | list | max }}"
+          # Precipitation probability for the next day it calculates it by getting all the 8 values for the day and dividing the result by 8
+          # It is not as accurate as I would like it to be but is the best I could do
+          day1_prec_prob: "{{ (full_data['weather.openweathermap']['forecast'] | selectattr('datetime', 'search', (now().date() + timedelta(days=1)) | string ) | map(attribute='precipitation_probability') | list | sum)/8 }}"
+          # First day weather condition
+          day1_condition: "{{ (full_data['weather.openweathermap']['forecast'] | selectattr('datetime', 'search', (now().date() + timedelta(days=1)) | string ) | map(attribute='condition') | list)[5] }}"
+          # First day precipitation level. Again by adding all the values for the day and dividing by 8.
+          day1_precipitation: "{{ (full_data['weather.openweathermap']['forecast'] | selectattr('datetime', 'search', (now().date() + timedelta(days=1)) | string ) | map(attribute='precipitation') | list | sum)/8 }}"
+          day2: "{{ (now().date() + timedelta(days=2)).strftime('%a') }}"
+          day2_min: "{{ full_data['weather.openweathermap']['forecast'] | selectattr('datetime', 'search', (now().date() + timedelta(days=2)) | string ) | map(attribute='temperature') | list | min }}"
+          day2_max: "{{ full_data['weather.openweathermap']['forecast'] | selectattr('datetime', 'search', (now().date() + timedelta(days=2)) | string ) | map(attribute='temperature') | list | max }}"
+          day2_prec_prob: "{{ (full_data['weather.openweathermap']['forecast'] | selectattr('datetime', 'search', (now().date() + timedelta(days=2)) | string ) | map(attribute='precipitation_probability') | list | sum)/8 }}"
+          day2_condition: "{{ (full_data['weather.openweathermap']['forecast'] | selectattr('datetime', 'search', (now().date() + timedelta(days=2)) | string ) | map(attribute='condition') | list)[5] }}"
+          day2_precipitation: "{{ (full_data['weather.openweathermap']['forecast'] | selectattr('datetime', 'search', (now().date() + timedelta(days=2)) | string ) | map(attribute='precipitation') | list | sum)/8 }}"
+          day3: "{{ (now().date() + timedelta(days=3)).strftime('%a') }}"
+          day3_min: "{{ full_data['weather.openweathermap']['forecast'] | selectattr('datetime', 'search', (now().date() + timedelta(days=3)) | string ) | map(attribute='temperature') | list | min }}"
+          day3_max: "{{ full_data['weather.openweathermap']['forecast'] | selectattr('datetime', 'search', (now().date() + timedelta(days=3)) | string ) | map(attribute='temperature') | list | max }}"
+          day3_prec_prob: "{{ (full_data['weather.openweathermap']['forecast'] | selectattr('datetime', 'search', (now().date() + timedelta(days=3)) | string ) | map(attribute='precipitation_probability') | list | sum)/8 }}"
+          day3_condition: "{{ (full_data['weather.openweathermap']['forecast'] | selectattr('datetime', 'search', (now().date() + timedelta(days=3)) | string ) | map(attribute='condition') | list)[5] }}"
+          day3_precipitation: "{{ (full_data['weather.openweathermap']['forecast'] | selectattr('datetime', 'search', (now().date() + timedelta(days=3)) | string ) | map(attribute='precipitation') | list | sum)/8 }}"
